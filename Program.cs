@@ -42,10 +42,7 @@ namespace FindTextByRegexp
         outputResult.Add(matches[i].Value);
       }
 
-      var cleanedString = outputResult.Distinct().Select(x => x.Replace("SC_ANALYTICS_GLOBAL_COOKIE=", string.Empty))
-                                                .Select(x => x.Replace(";", string.Empty))
-                                                .Select(x => new Guid(x).ToString())
-                                                .Select(x => "'" + x + "'");
+      var cleanedString = outputResult.Distinct();
       System.IO.File.WriteAllText(target, string.Join(", ", cleanedString.ToArray()));
     }
   }
